@@ -3,6 +3,7 @@
 -include("tell.hrl").
 
 -export([parse/1, 
+         format/1,
          atom_to_command/1, 
          atom_to_option/1, 
          option_to_atom/1, 
@@ -12,6 +13,13 @@
 -type iac_command() :: atom() |
                        {atom(), atom()} |
                        {atom(), iodata()}.
+
+-spec format({atom(), atom()}) -> iodata().
+format(Command) when is_list(Command) -> lists:map(fun format/1, Command);
+format({Command, Option}) when is_atom(Command) andalso is_atom(Option) ->
+  [?IAC, atom_to_command(Command), atom_to_option(Option)];
+format(Command) when is_atom(Command) -> 
+  [?IAC, atom_to_command(Command)].
 
 -spec parse(Data :: iodata()) -> {list(iac_command()), iodata()}.
 parse(Data) ->
