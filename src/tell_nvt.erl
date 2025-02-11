@@ -1,12 +1,12 @@
 -module(tell_nvt).
 
-%% @doc 
+%% @doc
 %% This module offers an NVT interface as described in RFC 854.
-%% The purpose of the module is to allow the programmer to parse 
+%% The purpose of the module is to allow the programmer to parse
 %% individual lines of telnet commands from a buffer allowing half-
-%% duplex functionality when required. Such as a client proposing 
+%% duplex functionality when required. Such as a client proposing
 %% an option and then additional data intended to be parsed with that option in mind.
-%% @end 
+%% @end
 
 -record(nvt, {buffer, state}).
 -type nvt() :: {nvt, {buffer, state}}.

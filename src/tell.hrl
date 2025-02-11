@@ -1,6 +1,6 @@
 %% based on RFC 854
 
-%% telnet commands 
+%% telnet commands
 -define(SE, 240).
 -define(NOP, 241).
 -define(DM, 242).
@@ -20,7 +20,7 @@
 
 %% telnet options
 %% RFC 856
--define(BINARY, 0). 
+-define(BINARY, 0).
 %% RFC 857
 -define(ECHO, 1).
 %% RFC 858
