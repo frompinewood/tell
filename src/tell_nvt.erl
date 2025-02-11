@@ -11,18 +11,23 @@
 -record(nvt, {buffer, state}).
 -type nvt() :: {nvt, {buffer, state}}.
 
--export([nvt/0, nvt_push/2, nvt_pull/1]).
+-export([nvt/0, nvt_push/2, nvt_pull/1, state/1]).
 
 -spec nvt() -> nvt().
 nvt() -> #nvt{buffer = queue:new(), state = maps:new()}.
 
 -spec nvt_push(string(), nvt()) -> nvt().
-nvt_push(Line, #nvt{buffer = Buffer} = Nvt) ->
+nvt_push(Line, #nvt{buffer = Buffer, state = State} = Nvt) ->
+    {Tel, Message} = tell:parse(Line),
     Nvt#nvt{
+        state = maps:merge(maps:from_list(Tel), State),
         buffer =
             queue:join(
                 Buffer,
-                queue:from_list(string:split(Line, "\n", all))
+                queue:from_list(
+                  lists:map(
+                    fun string:trim/1, 
+                    string:split(Message, "\n", all)))
             )
     }.
 
@@ -35,3 +40,6 @@ nvt_pull(#nvt{buffer = Buffer} = Nvt) ->
             {value, Data} -> Data
         end,
     {Line, Nvt#nvt{buffer = NewBuffer}}.
+
+-spec state(nvt()) -> map().
+state(Nvt) -> Nvt#nvt.state.
