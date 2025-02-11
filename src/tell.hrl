@@ -27,7 +27,18 @@
 -define(SUPRESS_GO_AHEAD, 3).
 %% RFC 859
 -define(STATUS, 5).
+%% RFC 1572
+-define(NEW_ENVIRON, 39).
 
 %% Subnegotiation Terms
 -define(IS, 0).
 -define(SEND, 1).
+-define(INFO, 2).
+
+%% New Environ Terms 
+
+-define(VAR, 0).
+-define(VALUE, 1).
+-define(ESC, 2).
+-define(USERVAR, 3).
+

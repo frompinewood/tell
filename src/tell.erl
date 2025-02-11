@@ -61,7 +61,8 @@ command_to_atom(?DONT) -> dont.
 
 option_to_atom(?ECHO) -> echo;
 option_to_atom(?STATUS) -> status;
-option_to_atom(?BINARY) -> binary.
+option_to_atom(?BINARY) -> binary;
+option_to_atom(?NEW_ENVIRON) -> new_environ.
 
 atom_to_command(no_op) -> ?NOP;
 atom_to_command(data_mark) -> ?DM;
@@ -79,4 +80,5 @@ atom_to_command(dont) -> ?DONT.
 
 atom_to_option(echo) -> ?ECHO;
 atom_to_option(status) -> ?STATUS;
-atom_to_option(binary) -> ?BINARY.
+atom_to_option(binary) -> ?BINARY;
+atom_to_option(new_environ) -> ?NEW_ENVIRON.
