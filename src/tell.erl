@@ -14,7 +14,7 @@
                        {atom(), atom()} |
                        {atom(), iodata()}.
 
--spec format({atom(), atom()}) -> iodata().
+-spec format({atom(), atom()} | list() | atom()) -> iodata().
 format(Command) when is_list(Command) -> lists:map(fun format/1, Command);
 format({Command, Option}) when is_atom(Command) andalso is_atom(Option) ->
   [?IAC, atom_to_command(Command), atom_to_option(Option)];
