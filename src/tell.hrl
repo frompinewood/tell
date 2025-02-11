@@ -24,7 +24,7 @@
 %% RFC 857
 -define(ECHO, 1).
 %% RFC 858
--define(SUPRESS_GO_AHEAD, 3).
+-define(SUPPRESS_GO_AHEAD, 3).
 %% RFC 859
 -define(STATUS, 5).
 %% RFC 1572
@@ -35,10 +35,9 @@
 -define(SEND, 1).
 -define(INFO, 2).
 
-%% New Environ Terms 
+%% New Environ Terms
 
 -define(VAR, 0).
 -define(VALUE, 1).
 -define(ESC, 2).
 -define(USERVAR, 3).
-

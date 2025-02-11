@@ -16,5 +16,7 @@ iac_negotiate(_Config) ->
     ?assertEqual({[{dont, echo}], []}, tell:parse([255, 254, 1])).
 
 iac_sub_negotiate(_Config) ->
-  ?assertEqual({[{neg, [1, 255]}], "Hello world!"}, 
-      tell:parse("Hello "++[255, 250, 1, 255, 255, 255, 240]++"world!")).
+    ?assertEqual(
+        {[{neg, [1, 255]}], "Hello world!"},
+        tell:parse("Hello " ++ [255, 250, 1, 255, 255, 255, 240] ++ "world!")
+    ).

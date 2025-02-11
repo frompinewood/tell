@@ -2,7 +2,11 @@
 
 -include("tell.hrl").
 
--export([parse/1, atom_to_command/1, atom_to_option/1, option_to_atom/1, command_to_atom/1]).
+-export([parse/1, 
+         atom_to_command/1, 
+         atom_to_option/1, 
+         option_to_atom/1, 
+         command_to_atom/1]).
 
 %% expand type to show supported atoms
 -type iac_command() :: atom() |
@@ -57,12 +61,21 @@ command_to_atom(?AO) -> abort_output;
 command_to_atom(?WILL) -> will;
 command_to_atom(?WONT) -> wont;
 command_to_atom(?DO) -> do;
-command_to_atom(?DONT) -> dont.
+command_to_atom(?DONT) -> dont;
+command_to_atom(Command)  
+  when is_integer(Command) andalso 
+       Command =< 256 andalso 
+       Command >= 0 -> {unknown, Command}.
 
 option_to_atom(?ECHO) -> echo;
 option_to_atom(?STATUS) -> status;
 option_to_atom(?BINARY) -> binary;
-option_to_atom(?NEW_ENVIRON) -> new_environ.
+option_to_atom(?SUPPRESS_GO_AHEAD) -> suppress_go_ahead;
+option_to_atom(?NEW_ENVIRON) -> new_environ;
+option_to_atom(Option)
+  when is_integer(Option) andalso 
+       Option =< 256 andalso 
+       Option >= 0 -> {unknown, Option}.
 
 atom_to_command(no_op) -> ?NOP;
 atom_to_command(data_mark) -> ?DM;
@@ -81,4 +94,5 @@ atom_to_command(dont) -> ?DONT.
 atom_to_option(echo) -> ?ECHO;
 atom_to_option(status) -> ?STATUS;
 atom_to_option(binary) -> ?BINARY;
+atom_to_option(suppress_go_ahead) -> ?SUPPRESS_GO_AHEAD;
 atom_to_option(new_environ) -> ?NEW_ENVIRON.
